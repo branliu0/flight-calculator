@@ -19,6 +19,9 @@
     let departure = null;
     let arrival = null;
 
+    let $departureSelect = null;
+    let $arrivalSelect = null;
+
     function recompute() {
         if (departure === null || arrival === null) return;
 
@@ -59,6 +62,15 @@
             + " square feet");
     }
 
+    function setAirports(iata1, iata2) {
+        let airport1 = data.find(e => e.id === iata1);
+        let airport2 = data.find(e => e.id === iata2);
+        $departureSelect.val(iata1).trigger("change")
+            .trigger({ type: 'select2:select', params: { data: airport1 } });
+        $arrivalSelect.val(iata2).trigger("change")
+            .trigger({ type: 'select2:select', params: { data: airport2 } });
+    }
+
     // Note: the name of this function is hardcoded into the JS file due to JSONP
     // Must use JSONP due to CORS and because Squarespace static assets get redirected
     // from flightfreeusa.org to squarespace.com, so we can't use for storing static assets.
@@ -68,8 +80,8 @@
             element.text = element.id + " - " + element.name;
         });
 
-        let $departureSelect = $("#departure");
-        let $arrivalSelect = $("#arrival");
+        $departureSelect = $("#departure");
+        $arrivalSelect = $("#arrival");
 
         $departureSelect.select2({
             data: data,
@@ -90,6 +102,9 @@
             arrival = e.params.data;
             recompute();
         });
+
+        // Start with some defaults.
+        setAirports("SFO", "JFK");
     }
 
     $(function() {
