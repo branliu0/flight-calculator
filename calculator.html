@@ -1,0 +1,106 @@
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<script type="text/javascript">
+    // TODO:
+    // - Allow <tab> to select
+
+    const MILES_PER_KM = 0.6213712;
+    const POUNDS_PER_KG = 2.204623;
+    const SQ_FT_PER_SQ_M = 10.76391;
+
+    let data = null;
+    let departure = null;
+    let arrival = null;
+
+    function recompute() {
+        if (departure === null || arrival === null) return;
+
+        const earthRadius = 6378.137; // kilometers
+        let dLat = (arrival.lat - departure.lat) * Math.PI / 180;
+        let dLon = (arrival.long - departure.long) * Math.PI / 180;
+        let a = Math.pow(Math.sin(dLat / 2), 2) +
+            Math.pow(Math.sin(dLon / 2), 2) *
+            Math.cos(departure.lat * Math.PI / 180) * Math.cos(arrival.lat * Math.PI / 180);
+        var distance = 2 * earthRadius * Math.asin(Math.sqrt(a));
+        $("#distance").text((distance * MILES_PER_KM).toFixed() + " miles");
+
+        const kgCo2PerKm = 0.16; // Taken from flightemissionmap.org
+        let emissions = 2 * distance * kgCo2PerKm;
+        $("#emissions").text((emissions * POUNDS_PER_KG).toFixed() + " lb CO2 equivalent");
+
+        const vegReductionPerYear = 540.0; // kilograms
+        let veg = emissions / vegReductionPerYear;
+        $("#veg").text(veg.toFixed(1) + " years");
+
+        const carpoolReductionPerYear = 1017.0; // kilograms
+        let carpool = emissions / carpoolReductionPerYear;
+        $("#carpool").text(carpool.toFixed(1) + " years");
+
+        const bigMacKg = 4;
+        let bigmac = emissions / 4;
+        $("#bigmac").text(bigmac.toFixed());
+
+        const iceFactor = 0.003; // 3 sq meters per ton of CO2
+        let seaice = emissions * iceFactor;
+        $("#seaice").text((seaice * SQ_FT_PER_SQ_M).toFixed(1) + " square meters");
+    }
+
+    // Note: the name of this function is hardcoded into the JS file due to JSONP
+    // Must use JSONP due to CORS and because Squarespace static assets get redirected
+    // from flightfreeusa.org to squarespace.com
+    function callback(d) {
+        data = d;
+        data.forEach(element => {
+            element.id = element.code;
+            element.text = element.code + " - " + element.name;
+        });
+
+        let $departureSelect = $("#departure");
+        let $arrivalSelect = $("#arrival");
+
+        $departureSelect.select2({
+            data: data,
+            placeholder: "Departure Airport (e.g., SFO)",
+        });
+
+        $arrivalSelect.select2({
+            data: data,
+            placeholder: "Arrival Airport (e.g., JFK)",
+        });
+
+        $departureSelect.on("select2:select", function(e) {
+            departure = e.params.data;
+            recompute();
+        });
+
+        $arrivalSelect.on("select2:select", function(e) {
+            arrival = e.params.data;
+            recompute();
+        });
+    }
+
+    $(function() {
+        $("#departure").select2({ placeholder: "Loading..." });
+        $("#arrival").select2({ placeholder: "Loading..." });
+        const url = "https://flightfreeusa.org/s/airports-openflights-slim-callback.js";
+        $.getJSON(url + "?callback=?");
+    });
+</script>
+
+<select id="departure" class="airport-select" name="departure" style="width: 300px;">
+    <option></option>
+</select>
+<select id="arrival" class="airport-select" name="arrival" style="width: 300px;">
+    <option></option>
+</select>
+
+<ul>
+    <li>Distance (each way): <span id="distance">N/A</span></li>
+    <li>Round-trip Emissions: <span id="emissions">N/A</span></li>
+    <li>Avoiding this trip is as climate friendly as being Vegetarian for: <span id="veg">N/A</span></li>
+    <li>Avoiding this trip is as climate friendly as Carpooling for: <span id="carpool">N/A</span></li>
+    <li>Taking this trip is like eating this many Cheeseburgers: <span id="bigmac">N/A</span></li>
+    <li>These emissions melt this much Arctic Sea Ice: <span id="seaice">N/A</span></li>
+</ul>
