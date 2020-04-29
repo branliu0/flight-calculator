@@ -52,17 +52,16 @@
 
         const iceFactor = 0.003; // 3 sq meters per ton of CO2
         let seaice = emissions * iceFactor;
-        $("#seaice").text((seaice * SQ_FT_PER_SQ_M).toFixed(1) + " square meters");
+        $("#seaice").text((seaice * SQ_FT_PER_SQ_M).toFixed(1) + " square feet");
     }
 
     // Note: the name of this function is hardcoded into the JS file due to JSONP
     // Must use JSONP due to CORS and because Squarespace static assets get redirected
     // from flightfreeusa.org to squarespace.com, so we can't use for storing static assets.
-    function callback(d) {
+    function jsonpCallback(d) {
         data = d;
         data.forEach(element => {
-            element.id = element.code;
-            element.text = element.code + " - " + element.name;
+            element.text = element.id + " - " + element.name;
         });
 
         let $departureSelect = $("#departure");
@@ -92,8 +91,7 @@
     $(function() {
         $("#departure").select2({ placeholder: "Loading..." });
         $("#arrival").select2({ placeholder: "Loading..." });
-        // const url = "https://flightfreeusa.org/s/airports-openflights-slim-callback.js";
-        const url = "https://flightfreeusa.org/s/airports-openflights-slim-callback.js";
+        const url = "https://cdn.jsdelivr.net/gh/thenovices/flight-calculator/data/data-jsonp.js";
         $.getJSON(url + "?callback=?");
     });
 </script>
