@@ -4,9 +4,6 @@
 
 <script type="text/javascript">
     // TODO:
-    // - Allow <tab> to select
-    // - Fix missing airports
-    // - Add City, Country in the name
     // - Select round-trip or not
     // - Add more flights? (lower priority)
     // - Fix the flight emissions conversion factor
@@ -31,28 +28,35 @@
         let a = Math.pow(Math.sin(dLat / 2), 2) +
             Math.pow(Math.sin(dLon / 2), 2) *
             Math.cos(departure.lat * Math.PI / 180) * Math.cos(arrival.lat * Math.PI / 180);
-        var distance = 2 * earthRadius * Math.asin(Math.sqrt(a));
-        $("#distance").text((distance * MILES_PER_KM).toFixed() + " miles");
+        let distance = 2 * earthRadius * Math.asin(Math.sqrt(a));
+
+        $("#distance").text(
+            (distance * MILES_PER_KM).toLocaleString(undefined, {maximumFractionDigits: 0})
+            + " miles");
 
         const kgCo2PerKm = 0.16; // Taken from flightemissionmap.org
         let emissions = 2 * distance * kgCo2PerKm;
-        $("#emissions").text((emissions * POUNDS_PER_KG).toFixed() + " lb CO2 equivalent");
+        $("#emissions").text(
+            (emissions * POUNDS_PER_KG).toLocaleString(undefined, {maximumFractionDigits: 0})
+            + " lb CO2 equivalent");
 
         const vegReductionPerYear = 540.0; // kilograms
         let veg = emissions / vegReductionPerYear;
-        $("#veg").text(veg.toFixed(1) + " years");
+        $("#veg").text(veg.toLocaleString(undefined, {maximumFractionDigits: 1}) + " years");
 
         const carpoolReductionPerYear = 1017.0; // kilograms
         let carpool = emissions / carpoolReductionPerYear;
-        $("#carpool").text(carpool.toFixed(1) + " years");
+        $("#carpool").text(carpool.toLocaleString(undefined, {maximumFractionDigits: 1}) + " years");
 
         const bigMacKg = 4;
         let bigmac = emissions / 4;
-        $("#bigmac").text(bigmac.toFixed());
+        $("#bigmac").text(bigmac.toLocaleString(undefined, {maximumFractionDigits: 0}));
 
         const iceFactor = 0.003; // 3 sq meters per ton of CO2
         let seaice = emissions * iceFactor;
-        $("#seaice").text((seaice * SQ_FT_PER_SQ_M).toFixed(1) + " square feet");
+        $("#seaice").text(
+            (seaice * SQ_FT_PER_SQ_M).toLocaleString(undefined, {maximumFractionDigits: 1})
+            + " square feet");
     }
 
     // Note: the name of this function is hardcoded into the JS file due to JSONP
