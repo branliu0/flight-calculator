@@ -6,10 +6,13 @@
     // TODO:
     // - Allow <tab> to select
     // - Fix missing airports
+    // - Add City, Country in the name
     // - Select round-trip or not
-    // - Add more flights
+    // - Add more flights? (lower priority)
     // - Fix the flight emissions conversion factor
     // - Add sources
+    // - Add example flights, most common routes
+    // - Add percentage of carbon budget
 
     const MILES_PER_KM = 0.6213712;
     const POUNDS_PER_KG = 2.204623;
@@ -54,7 +57,7 @@
 
     // Note: the name of this function is hardcoded into the JS file due to JSONP
     // Must use JSONP due to CORS and because Squarespace static assets get redirected
-    // from flightfreeusa.org to squarespace.com
+    // from flightfreeusa.org to squarespace.com, so we can't use for storing static assets.
     function callback(d) {
         data = d;
         data.forEach(element => {
@@ -89,6 +92,7 @@
     $(function() {
         $("#departure").select2({ placeholder: "Loading..." });
         $("#arrival").select2({ placeholder: "Loading..." });
+        // const url = "https://flightfreeusa.org/s/airports-openflights-slim-callback.js";
         const url = "https://flightfreeusa.org/s/airports-openflights-slim-callback.js";
         $.getJSON(url + "?callback=?");
     });
