@@ -41,13 +41,17 @@
 
         $("#distance").text(
             (distance * MILES_PER_KM).toLocaleString(undefined, {maximumFractionDigits: 0})
-            + " miles");
+            + " miles or "
+            + distance.toLocaleString(undefined, {maximumFractionDigits: 0})
+            + " km");
 
         const kgCo2PerKm = 0.16; // Taken from flightemissionmap.org
         let emissions = 2 * distance * kgCo2PerKm;
         $("#emissions").text(
             (emissions * POUNDS_PER_KG).toLocaleString(undefined, {maximumFractionDigits: 0})
-            + " lb CO2 equivalent");
+            + " lb or "
+            + emissions.toLocaleString(undefined, {maximumFractionDigits: 0})
+            + " kg CO2 equivalent");
 
         const vegReductionPerYear = 540.0; // kilograms
         let veg = emissions / vegReductionPerYear;
@@ -65,7 +69,10 @@
         let seaice = emissions * iceFactor;
         $("#seaice").text(
             (seaice * SQ_FT_PER_SQ_M).toLocaleString(undefined, {maximumFractionDigits: 1})
-            + " square feet");
+            + " square feet or "
+            + seaice.toLocaleString(undefined, {maximumFractionDigits: 1})
+            + " square meters");
+
     }
 
     function setAirports(iata1, iata2) {
