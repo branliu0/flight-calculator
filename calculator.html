@@ -45,7 +45,8 @@
             + distance.toLocaleString(undefined, {maximumFractionDigits: 0})
             + " km");
 
-        const kgCo2PerKm = 0.16; // Taken from flightemissionmap.org
+        // 90g/km and 1.9x multplier is pretty consensus. Plus 8% for indirect flights and delays.
+        const kgCo2PerKm = 0.09 * 1.9 * 1.08;
         let emissions = 2 * distance * kgCo2PerKm;
         $("#emissions").text(
             (emissions * POUNDS_PER_KG).toLocaleString(undefined, {maximumFractionDigits: 0})
