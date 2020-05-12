@@ -32,7 +32,7 @@ unusable.
 # Data Processing
 
 ```
-./process-data.rb
+./process-airport-data.rb
 ```
 
 1. Import Open Flights and Aviation Fanatic data
