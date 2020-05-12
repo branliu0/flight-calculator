@@ -60,10 +60,6 @@
         let carpool = emissions / carpoolReductionPerYear;
         $("#carpool").text(carpool.toLocaleString(undefined, {maximumFractionDigits: 1}) + " years");
 
-        const bigMacKg = 4;
-        let bigmac = emissions / 4;
-        $("#bigmac").text(bigmac.toLocaleString(undefined, {maximumFractionDigits: 0}));
-
         const iceFactor = 0.003; // 3 sq meters per ton of CO2
         let seaice = emissions * iceFactor;
         $("#seaice").text(
