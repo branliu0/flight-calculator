@@ -2,12 +2,6 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
-<style>
-    #airports {
-        text-align: center;
-    }
-</style>
-
 <script type="text/javascript">
     // TODO:
     // - Select round-trip or not
@@ -123,13 +117,33 @@
     });
 </script>
 
+<style>
+    #airports {
+        text-align: center;
+        width: 600px;
+        display: flex;
+    }
+
+    #airports > * {
+        width: 50%;
+    }
+
+    /* Note: select2 likes to have its style inline... */
+</style>
+
 <div id="airports">
-    <select id="departure" class="airport-select" name="departure" style="width: 300px;">
-        <option></option>
-    </select>
-    <select id="arrival" class="airport-select" name="arrival" style="width: 300px;">
-        <option></option>
-    </select>
+    <div>
+        <div>Departure</div>
+        <select id="departure" class="airport-select" name="departure" style="width: 90%;">
+            <option></option>
+        </select>
+    </div>
+    <div>
+        <div>Arrival</div>
+        <select id="arrival" class="airport-select" name="arrival" style="width: 90%;">
+            <option></option>
+        </select>
+    </div>
 </div>
 
 <ul>
