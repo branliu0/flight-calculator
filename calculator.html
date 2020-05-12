@@ -76,6 +76,12 @@
             + seaice.toLocaleString(undefined, {maximumFractionDigits: 1})
             + " square meters");
 
+        const earthCircum = 40e3; // 40,000km
+        const eurostarEmissions = 0.006; // kg per pkm (6 grams)
+        let eurostarDist = emissions / eurostarEmissions;
+        let timesAroundWorld = eurostarDist / earthCircum;
+        $("#eurostar").text(timesAroundWorld.toLocaleString(undefined, {maximumFractionDigits: 1})
+            + " times around the world");
     }
 
     function setAirports(iata1, iata2) {
@@ -175,5 +181,6 @@
     <li>Avoiding this trip is as climate friendly as being Vegetarian for: <span id="veg">N/A</span></li>
     <li>Avoiding this trip is as climate friendly as Carpooling for: <span id="carpool">N/A</span></li>
     <li>This many people in the world emit fewer greenhouse gases in one year: <span id="pop">N/A</span></li>
+    <li>You could travel this far in an electric train like Eurostar: <span id="eurostar">N/A</span></li>
     <li>These emissions melt this much Arctic Sea Ice: <span id="seaice">N/A</span></li>
 </ul>
