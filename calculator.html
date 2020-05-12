@@ -18,12 +18,16 @@
     let data = null;
     let departure = null;
     let arrival = null;
+    let ghgCdf = null;
+    let initialized = false;
 
     let $departureSelect = null;
     let $arrivalSelect = null;
 
     function recompute() {
         if (departure === null || arrival === null) return;
+
+        initialized = true;
 
         const earthRadius = 6378.137; // kilometers
         let dLat = (arrival.lat - departure.lat) * Math.PI / 180;
@@ -53,6 +57,16 @@
         const carpoolReductionPerYear = 1017.0; // kilograms
         let carpool = emissions / carpoolReductionPerYear;
         $("#carpool").text(carpool.toLocaleString(undefined, {maximumFractionDigits: 1}) + " years");
+        
+        if (ghgCdf !== null) {
+            let threshold = ghgCdf.find(e => e[0] > emissions / 1000);
+            let pop = threshold[1];
+            if (pop < 1e9) {
+                $("#pop").text((pop / 1e6).toLocaleString(undefined, {maximumFractionDigits: 0}) + " million");
+            } else {
+                $("#pop").text((pop / 1e9).toLocaleString(undefined, {maximumFractionDigits: 1}) + " billion");
+            }
+        }
 
         const iceFactor = 0.003; // 3 sq meters per ton of CO2
         let seaice = emissions * iceFactor;
@@ -109,11 +123,20 @@
         setAirports("SFO", "JFK");
     }
 
+    // Note: The name of this function is hardcoded in the JSONP
+    function ghgCallback(d) {
+        ghgCdf = d;
+        // If we've already started computing, then refresh so that the GHG data shows up.
+        if (initialized) recompute();
+    }
+
     $(function() {
         $("#departure").select2({ placeholder: "Loading..." });
         $("#arrival").select2({ placeholder: "Loading..." });
         const url = "https://cdn.jsdelivr.net/gh/thenovices/flight-calculator/data/data-jsonp.js";
         $.getJSON(url + "?callback=?");
+        const ghgUrl = "https://cdn.jsdelivr.net/gh/thenovices/flight-calculator/data/emissions-cdf-jsonp.js"
+        $.getJSON(ghgUrl + "?callback=?");
     });
 </script>
 
@@ -151,5 +174,6 @@
     <li>Round-trip Emissions: <span id="emissions">N/A</span></li>
     <li>Avoiding this trip is as climate friendly as being Vegetarian for: <span id="veg">N/A</span></li>
     <li>Avoiding this trip is as climate friendly as Carpooling for: <span id="carpool">N/A</span></li>
+    <li>This many people in the world emit fewer greenhouse gases in one year: <span id="pop">N/A</span></li>
     <li>These emissions melt this much Arctic Sea Ice: <span id="seaice">N/A</span></li>
 </ul>
