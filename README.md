@@ -27,7 +27,7 @@ We use the great-circle distance: https://en.wikipedia.org/wiki/Great-circle_dis
 The UK government (in 2018) recommends **adding 8%** to the great-circle distance to account for indirect flight paths and delays: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/726911/2018_methodology_paper_FINAL_v01-00.pdf
 
 ## Flying Emissions
-The average carbon intensity from passenger aviation in 2018 was 8**8g CO2/revenue-passenger-kilometer**: https://theicct.org/sites/default/files/publications/ICCT_CO2-commercl-aviation-2018_20190918.pdf
+The average carbon intensity from passenger aviation in 2018 was **88g CO2/revenue-passenger-kilometer**: https://theicct.org/sites/default/files/publications/ICCT_CO2-commercl-aviation-2018_20190918.pdf
 
 To account for the non-CO2 climate effects of aviation, the UK Government (in 2018) recommends applying a **multiplier of 1.9**: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/726911/2018_methodology_paper_FINAL_v01-00.pdf
 
