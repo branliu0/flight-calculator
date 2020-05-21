@@ -48,7 +48,7 @@
         let emissions = 2 * distance * kgCo2PerKm;
         $("#emissions").text(
             (emissions / 1000).toLocaleString(undefined, {maximumFractionDigits: 1})
-            + " tons CO2 equivalent");
+            + " metric tons CO2 equivalent");
 
         const vegReductionPerYear = 540.0; // kilograms
         let veg = emissions / vegReductionPerYear;
