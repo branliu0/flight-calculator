@@ -43,7 +43,7 @@
             + distance.toLocaleString(undefined, {maximumFractionDigits: 0})
             + " km");
 
-        // 90g/km and 1.9x multplier is pretty consensus. Plus 8% for indirect flights and delays.
+        // 88g/km and 1.9x multplier is pretty consensus. Plus 8% for indirect flights and delays.
         const kgCo2PerKm = 0.088 * 1.9 * 1.08;
         let emissions = 2 * distance * kgCo2PerKm;
         $("#emissions").text(
@@ -57,7 +57,7 @@
         const carpoolReductionPerYear = 1017.0; // kilograms
         let carpool = emissions / carpoolReductionPerYear;
         $("#carpool").text(carpool.toLocaleString(undefined, {maximumFractionDigits: 1}) + " years");
-        
+
         if (ghgCdf !== null) {
             let threshold = ghgCdf.find(e => e[0] > emissions / 1000);
             let pop = threshold[1];
@@ -158,7 +158,17 @@
     }
 
     /* Note: select2 likes to have its style inline... */
+
+  	li span {
+        font-weight: bold;
+  	}
+
+    li {
+      margin-top: 10px;
+  }
 </style>
+
+<div style="border: 1px solid black; padding: 10px; font-size: 22px;">
 
 <div id="airports">
     <div>
@@ -177,10 +187,11 @@
 
 <ul>
     <li>Distance (each way): <span id="distance">N/A</span></li>
-    <li>Round-trip Emissions: <span id="emissions">N/A</span></li>
+    <li>Round-trip Emissions Per Passenger: <span id="emissions">N/A</span></li>
     <li>Avoiding this trip is as climate friendly as being Vegetarian for: <span id="veg">N/A</span></li>
     <li>Avoiding this trip is as climate friendly as Carpooling for: <span id="carpool">N/A</span></li>
     <li>This many people in the world emit fewer greenhouse gases in one year: <span id="pop">N/A</span></li>
     <li>You could travel this far in an electric train like Eurostar: <span id="eurostar">N/A</span></li>
     <li>These emissions melt this much Arctic Sea Ice: <span id="seaice">N/A</span></li>
 </ul>
+</div>
