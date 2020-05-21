@@ -157,12 +157,23 @@
 
     #airports {
         text-align: center;
-        width: 600px;
+        width: 100%;
         display: flex;
     }
 
     #airports > * {
         width: 50%;
+    }
+
+    @media(max-width: 600px) {
+        #airports {
+            flex-direction: column;
+        }
+
+        #airports > * {
+            width: 100%;
+            margin-top: 10px;
+        }
     }
 
     /* Note: select2 likes to have its style inline... */
