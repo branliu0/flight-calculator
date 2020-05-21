@@ -147,6 +147,14 @@
 </script>
 
 <style>
+    #calculator {
+        border: 1px solid black;
+        padding: 10px;
+        font-size: 22px;
+        display: flex;
+        flex-direction: column;
+    }
+
     #airports {
         text-align: center;
         width: 600px;
@@ -165,33 +173,38 @@
 
     li {
       margin-top: 10px;
-  }
+    }
+
+    a.sources {
+        align-self: flex-end;
+    }
 </style>
 
-<div style="border: 1px solid black; padding: 10px; font-size: 22px;">
-
-<div id="airports">
-    <div>
-        <div>Departure</div>
-        <select id="departure" class="airport-select" name="departure" style="width: 90%;">
-            <option></option>
-        </select>
+<div id="calculator">
+    <div id="airports">
+        <div>
+            <div>Departure</div>
+            <select id="departure" class="airport-select" name="departure" style="width: 90%;">
+                <option></option>
+            </select>
+        </div>
+        <div>
+            <div>Arrival</div>
+            <select id="arrival" class="airport-select" name="arrival" style="width: 90%;">
+                <option></option>
+            </select>
+        </div>
     </div>
-    <div>
-        <div>Arrival</div>
-        <select id="arrival" class="airport-select" name="arrival" style="width: 90%;">
-            <option></option>
-        </select>
-    </div>
-</div>
 
-<ul>
-    <li>Distance (each way): <span id="distance">N/A</span></li>
-    <li>Round-trip Emissions Per Passenger: <span id="emissions">N/A</span></li>
-    <li>Avoiding this trip is as climate friendly as being Vegetarian for: <span id="veg">N/A</span></li>
-    <li>Avoiding this trip is as climate friendly as Carpooling for: <span id="carpool">N/A</span></li>
-    <li>This many people in the world emit fewer greenhouse gases in one year: <span id="pop">N/A</span></li>
-    <li>You could travel this far in an electric train like Eurostar: <span id="eurostar">N/A</span></li>
-    <li>These emissions melt this much Arctic Sea Ice: <span id="seaice">N/A</span></li>
-</ul>
+    <ul>
+        <li>Distance (each way): <span id="distance">N/A</span></li>
+        <li>Round-trip Emissions Per Passenger: <span id="emissions">N/A</span></li>
+        <li>Avoiding this trip is as climate friendly as being Vegetarian for: <span id="veg">N/A</span></li>
+        <li>Avoiding this trip is as climate friendly as Carpooling for: <span id="carpool">N/A</span></li>
+        <li>This many people in the world emit fewer greenhouse gases in one year: <span id="pop">N/A</span></li>
+        <li>You could travel this far in an electric train like Eurostar: <span id="eurostar">N/A</span></li>
+        <li>These emissions melt this much Arctic Sea Ice: <span id="seaice">N/A</span></li>
+    </ul>
+
+    <a class="sources" href="https://github.com/thenovices/flight-calculator">code & sources</a>
 </div>
