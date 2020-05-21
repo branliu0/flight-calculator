@@ -46,7 +46,12 @@ We take this to be approximately a 20-mile round-trip commute.
 
 According to the EPA, the average car’s fuel economy in the US is 22.3mpg and each gallon of gasoline causes 9 kg CO2e of emissions: https://www.epa.gov/energy/greenhouse-gases-equivalencies-calculator-calculations-and-references
 
-Using these figures, and assuming one switches from driving alone to carpooling with one other person for all 252 working days of the year, we find an estimated reduction of **1017 kg CO2e/year**.
+Using these figures, and assuming one switches from driving alone to carpooling
+with one other person for all 252 working days of the year, we find an estimated
+reduction of **1017 kg CO2e/year**.
+
+For comparison, the following website also assumes a 20-mile round-trip commute
+and gives a greenhouse gas reduction of 893 kg/year: https://bcgreencare.ca/carpooling-has-big-impact
 
 ## Per Capita Greenhouse Gas Emissions by Country
 Note that while we have data for per capita CO2 emissions up to 2018, we only have per capita greenhouse gas emissions (which accounts for non-CO2 gases) up to 2014: http://cait.wri.org/historical/Country%20GHG%20Emissions?indicator[]=Population&indicator[]=Total%20GHG%20Emissions%20Excluding%20Land-Use%20Change%20and%20Forestry%20Per%20Capita&indicator[]=Total%20CO2%20Emissions%20Excluding%20Land-Use%20Change%20and%20Forestry%20Per%20Capita&indicator[]=Total%20GHG%20Emissions%20Including%20Land-Use%20Change%20and%20Forestry%20Per%20Capita&year[]=2014&sortIdx=NaN&sortDir=asc&chartType=geo
